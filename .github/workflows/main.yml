@@ -1,0 +1,27 @@
+name: Bot Leboncoin
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v3
+
+      - name: Installer Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Installer les dépendances
+        run: |
+          pip install requests beautifulsoup4
+
+      - name: Lancer le bot
+        run: python main.py
+        
